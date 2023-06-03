@@ -4,6 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using gh.Proxies.Contracts;
 using gh.Proxies.GithubProxy;
 using MediatR;
+using gh.Domain.Mappings;
 
 var GH_BASE_URL = Environment.GetEnvironmentVariable("GH_BASE_URL") ?? throw new ArgumentNullException("Missing / incorrect GH base url in settings");
 
@@ -20,5 +21,8 @@ var host = new HostBuilder()
 
     })
     .Build();
+
+// Init mappings
+Mapper.CreateMappings();    
 
 host.Run();
