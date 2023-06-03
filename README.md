@@ -80,9 +80,9 @@ insert diagram here....
             # Difficult to test, read/follow, etc...
             # Too many things happining 
 
-    # GhReposWithMediator.cs follows the Command Query Seperation (CQS) pattern with Meditor
+    # GhReposWithMediator.cs follows the Command Query Seperation (CQS) pattern with Mediator
         # Pros:
-            # Like how .net works behind the scenes, Meditor follows that pipeline approach. 
+            # Like how .net works behind the scenes, Mediator follows that pipeline approach. 
             The benefit of this allows you segment your code and apply seperation of concerns. 
             # Your classes become much smaller and readable.
             # Follows Single responsibilty principal 
