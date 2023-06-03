@@ -50,7 +50,7 @@ insert diagram here....
     # Cost effective 
         # At least in Azure, its basically free
             # Functions are free up till 1 million executions
-            # Apim consumption plan is free with 99% reliability
+            # Apim consumption plan is free with 99.95% reliability
 
     # Highly Scaleable (Scale with need)
         # Functions will automatically scale based on consumption
