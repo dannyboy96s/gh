@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using gh.Domain.Repo;
 using gh.Proxies.Contracts;
 
 namespace gh.Proxies.GithubProxy
@@ -15,7 +16,7 @@ namespace gh.Proxies.GithubProxy
         {  
         }
 
-        public async Task<string> GetRepoContributors(string org, string repoName, CancellationToken cancellationToken)
+        public async Task<List<Contributor>> GetRepoContributors(string org, string repoName, CancellationToken cancellationToken)
         {
             // Set the token
             Token = GH_TOKEN;
@@ -28,8 +29,8 @@ namespace gh.Proxies.GithubProxy
             Headers = headers;
             // Set the segment url
             var seg = $"repos/{org}/{repoName}/contributors";
-            // Make the call 
-            var response = await GetAsync<string>(seg, null, 30, cancellationToken);
+            // Make the http call
+            var response = await GetAsync<List<Contributor>>(seg, null, 30, cancellationToken);
             //
             return response;
         }

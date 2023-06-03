@@ -2,24 +2,32 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using gh.Domain.Response;
 using gh.Proxies.Contracts;
+using Mapster;
 using MediatR;
 
 namespace gh.CQS.Queries.Github
 {
-    public class GetRepoContributorsQueryHandler : IRequestHandler<GetRepoContributorsQuery, string>
+    public class GetRepoContributorsQueryHandler : IRequestHandler<GetRepoContributorsQuery, List<ContributorResponse>>
     {
         private readonly IGithubProxy _proxy;
 
         public GetRepoContributorsQueryHandler(IGithubProxy proxy)
             => _proxy = proxy ?? throw new ArgumentNullException(nameof(proxy));
 
-        public async Task<string> Handle(GetRepoContributorsQuery request, CancellationToken cancellationToken)
+        public async Task<List<ContributorResponse>> Handle(GetRepoContributorsQuery request, CancellationToken cancellationToken)
         {
             try 
             {
-                var result = await _proxy.GetRepoContributors(request.Org, request.Repo, cancellationToken);
-                // map to repsonse model
+                var contributors = await _proxy.GetRepoContributors(request.Org, request.Repo, cancellationToken);
+                // map to ContributorResponse model
+                var result = new List<ContributorResponse>();
+                if (contributors is not null)
+                    foreach (var contributor in contributors)
+                        // map to ContributorResponse model and add to result list
+                        result.Add(contributor.Adapt<ContributorResponse>());
+                // 
                 return result; 
             }
             catch (Exception e) 

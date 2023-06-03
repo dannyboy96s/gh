@@ -37,6 +37,7 @@ namespace gh.Proxies
             } 
             catch(FlurlHttpException fex) 
             {
+                // can do some custom error handling here
                 errorMsg = fex.Message;
             }
             throw new Exception(errorMsg);
