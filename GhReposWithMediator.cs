@@ -1,5 +1,6 @@
 using System.Net;
 using gh.CQS.Queries.Github;
+using gh.Domain.Response;
 using MediatR;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
@@ -21,7 +22,7 @@ namespace Company.Function
 
         [Function("GetGhReposContributorsWithMediator")]
         [OpenApiOperation(operationId: "GetGhReposContributorsWithMediator")]
-        [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "application/json", bodyType: typeof(string), Description = "Get Repo Contributors by org and repo name")]
+        [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "application/json", bodyType: typeof(List<ContributorResponse>), Description = "Get a list of Repo Contributors by org and repo name")]
         public async Task<HttpResponseData> Run([HttpTrigger(AuthorizationLevel.Function, "get", Route = "gh/v1/mediator/repos/{org}/{repo}/contributors")] HttpRequestData req, string org, string repo, CancellationToken cancellationToken)
         {
             var response = req.CreateResponse(HttpStatusCode.OK);
