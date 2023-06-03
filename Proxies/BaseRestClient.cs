@@ -11,7 +11,7 @@ namespace gh.Proxies
         protected string Url;
         protected HttpClient HttpClient;
         protected string Token;
-        protected object Headers;
+        protected Dictionary<string, string> Headers;
 
         protected BaseRestClient(string url)
             => Url = url ?? throw new ArgumentNullException(nameof(url));
@@ -22,7 +22,7 @@ namespace gh.Proxies
                                             CancellationToken cancellationToken = default) 
         {
             async Task<T> Func() 
-                => await Request($"{Url}/{segment}", timeout)
+                => await Request($"{Url}{segment}", timeout)
                 .GetJsonAsync<T>(cancellationToken);
             //
             return await RunAsync(Func);
@@ -50,7 +50,8 @@ namespace gh.Proxies
             if(Token is not null)
                 request = request.WithOAuthBearerToken(Token);
             if(Headers is not null)
-                request = request.WithHeaders(Headers);
+                foreach (var h in Headers)
+                    request = request.WithHeader(h.Key, h.Value);
             //
             return request;
         }

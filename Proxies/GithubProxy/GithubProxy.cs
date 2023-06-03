@@ -17,28 +17,20 @@ namespace gh.Proxies.GithubProxy
 
         public async Task<string> GetRepoContributors(string org, string repoName, CancellationToken cancellationToken)
         {
-            /*
-                              request.Headers.TryAddWithoutValidation("Accept", "application/vnd.github+json");
-                    request.Headers.TryAddWithoutValidation("Authorization", "Bearer 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");
-                    request.Headers.TryAddWithoutValidation("X-GitHub-Api-Version", "2022-11-28"); 
-                    request.Headers.TryAddWithoutValidation("User-Agent", "my test app"); 
-            */
+            // Set the token
             Token = GH_TOKEN;
+            // Set the headers per github requirement
             var headers = new Dictionary<string, string> {
                 {"X-GitHub-Api-Version" , "2022-11-28"},
                 {"Accept", "application/vnd.github+json"},
                 {"User-Agent" , "my test app"}
             };
-            /*var headers2 = new {
-                X-GitHub-Api-Version = "2022-11-28",
-                Accept = "application/vnd.github+json",
-                User-Agent = "my test app"
-            };*/
-            //var objHeader = ConvertDictionaryTo<object>(headers);
-            //Headers = headers2;//;objHeader;
+            Headers = headers;
+            // Set the segment url
             var seg = $"repos/{org}/{repoName}/contributors";
+            // Make the call 
+            var response = await GetAsync<string>(seg, null, 30, cancellationToken);
             //
-            var response = await GetCAsync(seg);
             return response;
         }
 
@@ -62,17 +54,5 @@ namespace gh.Proxies.GithubProxy
                 }
             }
         }
-
-        private T ConvertDictionaryTo<T>(IDictionary<string, string> dictionary) where T : new()
-        {
-            Type type = typeof (T);
-            T ret = new T();
-            foreach (var keyValue in dictionary)
-                type.GetProperty(keyValue.Key).SetValue(ret, keyValue.Value, null);
-            //
-            return ret;
-        }
-
-        
     }
 }
