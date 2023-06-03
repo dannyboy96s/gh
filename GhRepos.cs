@@ -6,19 +6,19 @@ using Microsoft.Extensions.Logging;
 
 namespace Company.Function
 {
-    public class GhStatus
+    public class GhRepos
     {
         private readonly ILogger _logger;
 
-        public GhStatus(ILoggerFactory loggerFactory)
+        public GhRepos(ILoggerFactory loggerFactory)
         {
             _logger = loggerFactory.CreateLogger<GhStatus>();
         }
 
-        [Function("GhStatus")]
-        [OpenApiOperation(operationId: "GhStatus")]
-        [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "application/json", bodyType: typeof(string), Description = "Status endpoint")]
-        public HttpResponseData Run([HttpTrigger(AuthorizationLevel.Function, "get", Route = "gh/v1/status")] HttpRequestData req)
+        [Function("GetGhReposContributors")]
+        [OpenApiOperation(operationId: "GetGhReposContributors")]
+        [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "application/json", bodyType: typeof(string), Description = "Get Repo Contributors by org and repo name")]
+        public HttpResponseData Run([HttpTrigger(AuthorizationLevel.Function, "get", Route = "gh/v1/repos/{org}/contributors/{repo}")] HttpRequestData req, string org, string repo, CancellationToken cancellationToken)
         {
             _logger.LogInformation("C# HTTP trigger function processed a request.");
 
