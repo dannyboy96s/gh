@@ -4,13 +4,13 @@
     1. Make sure to update your local.settings.json file with your github token (sample below) 
 ```json
 {
-"IsEncrypted": false,
-"Values": {
-    "AzureWebJobsStorage": "",
-    "FUNCTIONS_WORKER_RUNTIME": "dotnet-isolated",
-    "GH_TOKEN": "<github_token>",
-    "GH_BASE_URL": "https://api.github.com/"
-}
+    "IsEncrypted": false,
+    "Values": {
+        "AzureWebJobsStorage": "",
+        "FUNCTIONS_WORKER_RUNTIME": "dotnet-isolated",
+        "GH_TOKEN": "<github_token>",
+        "GH_BASE_URL": "https://api.github.com/"
+    }
 }
 ``` 
 
@@ -79,7 +79,7 @@ insert diagram here....
             # End up with MONSTER classes with thousands of lines
             # Difficult to test, read/follow, etc...
             # Too many things happining 
-            
+
     # GhReposWithMediator.cs follows the Command Query Seperation (CQS) pattern with Meditor
         # Pros:
             # Like how .net works behind the scenes, Meditor follows that pipeline approach. 
