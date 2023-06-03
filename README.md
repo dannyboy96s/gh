@@ -33,14 +33,14 @@ insert diagram here....
     2. Add the secrets in the app settings of the function so it will be able to grab the token, connection string, etc...
 
     3. Deploy Azure Api Management (APIM) and stitch the function to the APIM via the swagger 
-    import feature (We accomplish this by call the swagger endpoint from the function)
+    import feature (We accomplish this by calling the swagger endpoint from the function)
 
     4. Within APIM you can add policies like validating JWT tokens, caching, rate limiting, etc...
 
     Thats pretty much it.... if you want an E2E solution
 
-    BONUS:
-    As a bonus you can add Azure Front Door (similiar to cloud front from aws) on top 
+    Alternatives:
+    As a alternative you can add Azure Front Door (similiar to cloud front from aws) on top 
     of APIM or directly on top on the functions.
     Considerations for Azure Front Door, 
         # Can support Geo disater recovery (Primary & Secondary region) and route traffic accordingly
