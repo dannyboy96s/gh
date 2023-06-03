@@ -2,17 +2,17 @@
 
 # Setup guide
     1. Make sure to update your local.settings.json file with your github token (sample below) 
-    ```json
-    {
-    "IsEncrypted": false,
-    "Values": {
-        "AzureWebJobsStorage": "",
-        "FUNCTIONS_WORKER_RUNTIME": "dotnet-isolated",
-        "GH_TOKEN": "<github_token>",
-        "GH_BASE_URL": "https://api.github.com/"
-    }
-    }
-    ``` 
+```json
+{
+"IsEncrypted": false,
+"Values": {
+    "AzureWebJobsStorage": "",
+    "FUNCTIONS_WORKER_RUNTIME": "dotnet-isolated",
+    "GH_TOKEN": "<github_token>",
+    "GH_BASE_URL": "https://api.github.com/"
+}
+}
+``` 
 
     2. Run the project
 
@@ -29,35 +29,47 @@ insert diagram here....
     Utilized a serverless architecture, Azure functions, to accomplish this task.
     If we are to deploy this Azure this is how the overall design will be.
     1. Deploy functions to Azure via ci/cd pipeline
+
     2. Add the secrets in the app settings of the function so it will be able to grab the token, connection string, etc...
+
     3. Deploy Azure Api Management (APIM) and stitch the function to the APIM via the swagger 
     import feature (We accomplish this by call the swagger endpoint from the function)
+
     4. Within APIM you can add policies like validating JWT tokens, caching, rate limiting, etc...
+
     Thats pretty much it.... if you want an E2E solution
-    # As a bonus you can add Azure Front Door (similiar to cloud front from aws) on top 
+
+    BONUS:
+    As a bonus you can add Azure Front Door (similiar to cloud front from aws) on top 
     of APIM or directly on top on the functions.
     Considerations for Azure Front Door, 
-    # Can support Geo disater recovery (Primary & Secondary region) and route traffic accordingly
-    # Can support multiple policies (ex: sql injection prevetion, rate limiting, etc...)
+        # Can support Geo disater recovery (Primary & Secondary region) and route traffic accordingly
+        # Can support multiple policies (ex: sql injection prevetion, rate limiting, etc...)
 
 # Reason for implementing a serveless approach
     # Cost effective 
         # At least in Azure, its basically free
             # Functions are free up till 1 million executions
             # Apim consumption plan is free with 99% reliability
+
     # Highly Scaleable (Scale with need)
         # Functions will automatically scale based on consumption
+
     # No infrastructure to manage (everything is managed by cloud provider)
+
     # The ask for this task is fairly simple, it is not complex, there is no need to 
     create .net core web api and deploy to AKS (aws EKS equivalient) or 
     app services (aws Fargate equivalent), going down that route will 
     significantly increase cost,complexity and added maintence especially if you 
     decided to deploy to AKS (aws EKS equivalient).
+
     # Can easily implement timed functions if you want it to run on a CRON
+
     # Can easily trigger the function via http trigger, blob trigger, service bus queue trigger, etc... 
 
 # Code design decisions
     # I implemented there two approaches (Service Pattern and CQS)
+
     # GhRepos.cs follows the Service Pattern 
         # In this case, I just injected the Proxy directly, but the idea is still the same 
         # Pros:
@@ -67,6 +79,7 @@ insert diagram here....
             # End up with MONSTER classes with thousands of lines
             # Difficult to test, read/follow, etc...
             # Too many things happining 
+            
     # GhReposWithMediator.cs follows the Command Query Seperation (CQS) pattern with Meditor
         # Pros:
             # Like how .net works behind the scenes, Meditor follows that pipeline approach. 
