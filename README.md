@@ -16,7 +16,7 @@
 
     2. Run the project
 
-    3. To see the swagger view, once the project is running you can below url
+    3. To see the swagger view, once the project is running you can use the below url
         # Local host swagger ui http://localhost:PORT/api/swagger/ui
         # sample org/repo for /contributors endpoint
             # org: jbogard
@@ -66,7 +66,7 @@
     # The ask for this task is fairly simple, it is not complex, there is no need to 
     create .net core web api and deploy to AKS (aws EKS equivalient) or 
     app services (aws Fargate equivalent), going down that route will 
-    significantly increase cost,complexity and added maintence especially if you 
+    significantly increase cost,complexity and added maintenance especially if you 
     decided to deploy to AKS (aws EKS equivalient).
 
     # Can easily implement timed functions if you want it to run on a CRON
@@ -92,10 +92,12 @@
             The benefit of this allows you segment your code and apply seperation of concerns. 
             # Your classes become much smaller and readable.
             # Follows Single responsibilty principal 
-            # If you are approaching the task form a domain perspective (DDD) then you Commands and Queries will be organized by Domain
+            # If you are approaching the task form a domain perspective (DDD) then your Commands and Queries will be organized by the Domain models
             # Easier to test
             # Classes are not polluted 
-            # etc.......
+            # Cleaner code
+            # etc...
+
         # Cons:
             # Could add an extra layer of complexity, but its 100% worth implementing this, will make your lives easier, trust me
         # Example mediator flow:
@@ -108,7 +110,7 @@
 # Future Enchancements
     # Request Validation
         # Can be accomplished with Mediator validation behavior
-    # Middleware for jwt authentication to protect the function endpoints
+    # Middleware for jwt authentication to protect the function endpoints 
     # Consolidate logging and handle expections better (custom exceptions)
     # Add unit tests
 
