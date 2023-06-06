@@ -35,7 +35,7 @@ namespace gh.Proxies.GithubProxy
             return response;
         }
 
-        public async Task<List<Pull2>> GetRepoPulls(string org, string repoName, CancellationToken cancellationToken)
+        public async Task<List<Pull>> GetRepoPulls(string org, string repoName, CancellationToken cancellationToken)
         {
             // Set the token
             Token = GH_TOKEN;
@@ -49,7 +49,7 @@ namespace gh.Proxies.GithubProxy
             // Set the segment url
             var seg = $"repos/{org}/{repoName}/pulls";
             // Make the http call
-            var response = await GetAsync<List<Pull2>>(seg, null, 30, cancellationToken);
+            var response = await GetAsync<List<Pull>>(seg, null, 30, cancellationToken);
             //
             return response;
         }

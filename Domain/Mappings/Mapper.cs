@@ -17,7 +17,7 @@ namespace gh.Domain.Mappings
                 .Map(dest => dest.NumberOfContributions, src => src.Contributions)
                 .TwoWays();   
             // map from Pull to PullsResponse 
-            TypeAdapterConfig<Pull2, PullsResponse>.NewConfig()
+            TypeAdapterConfig<Pull, PullsResponse>.NewConfig()
                 .Map(dest => dest.PrUrl, src => src.url)
                 .Map(dest => dest.PrNumber, src => src.number)
                 .Map(dest => dest.Title, src => src.title)
@@ -26,7 +26,6 @@ namespace gh.Domain.Mappings
                 .Map(dest => dest.UpdatedAt, src => src.updated_at)
                 .Map(dest => dest.MergedAt, src => src.merged_at)
                 .Map(dest => dest.ClosedAt, src => src.closed_at);
-                //.Map(dest => dest.Reviewers, src => src.requested_reviewers.AsQueryable().ProjectToType<Requested_Reviewer>().ToList()); 
             // Do the Mapping for RequestedReviewer to Requested_Reviewer
             TypeAdapterConfig<RequestedReviewer, Requested_Reviewer>.NewConfig()
                 .Map(dest => dest.GithubUserName, src => src.login)

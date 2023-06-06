@@ -9,6 +9,6 @@ namespace gh.Proxies.Contracts
     public interface IGithubProxy
     {
         Task<List<Contributor>> GetRepoContributors(string org, string repoName, CancellationToken cancellationToken);
-        Task<List<Pull2>> GetRepoPulls(string org, string repoName, CancellationToken cancellationToken);
+        Task<List<Pull>> GetRepoPulls(string org, string repoName, CancellationToken cancellationToken);
     }
 }
