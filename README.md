@@ -52,7 +52,7 @@
         # Can support Geo disater recovery (Primary & Secondary region) and route traffic accordingly
         # Can support multiple policies (ex: sql injection prevetion, rate limiting, etc...)
 
-# Reason for implementing a serveless approach
+# Reason for implementing a serverless approach
     # Cost effective 
         # At least in Azure, its basically free
             # Functions are free up till 1 million executions
