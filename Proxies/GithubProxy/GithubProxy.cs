@@ -53,25 +53,5 @@ namespace gh.Proxies.GithubProxy
             //
             return response;
         }
-
-        protected async Task<string> GetCAsync(string segment){
-            using (var httpClient = new HttpClient())
-            {
-                using (var request = new HttpRequestMessage(new HttpMethod("GET"), $"{Url}{segment}"))
-                {
-                    request.Headers.TryAddWithoutValidation("Accept", "application/vnd.github+json");
-                    request.Headers.TryAddWithoutValidation("Authorization", $"Bearer {Token}");
-                    request.Headers.TryAddWithoutValidation("X-GitHub-Api-Version", "2022-11-28"); 
-                    request.Headers.TryAddWithoutValidation("User-Agent", "my test app"); 
-
-                    var resp = await httpClient.SendAsync(request);
-                    if(resp.IsSuccessStatusCode) {
-                        return await resp.Content.ReadAsStringAsync();
-
-                    }
-                    throw new Exception("http error:"+ resp.StatusCode);
-                }
-            }
-        }
     }
 }
