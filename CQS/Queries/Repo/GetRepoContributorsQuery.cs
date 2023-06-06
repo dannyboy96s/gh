@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using MediatR;
 using gh.Domain.Response;
 
-namespace gh.CQS.Queries.Github
+namespace gh.CQS.Queries.Repo
 {
     public class GetRepoContributorsQuery : IRequest<List<ContributorResponse>>
     {

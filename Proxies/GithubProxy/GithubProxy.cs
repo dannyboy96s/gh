@@ -20,7 +20,7 @@ namespace gh.Proxies.GithubProxy
         {
             // Set the token
             Token = GH_TOKEN;
-            // Set the headers per github requirement
+            // Set the headers per github requirement 
             var headers = new Dictionary<string, string> {
                 {"X-GitHub-Api-Version" , "2022-11-28"},
                 {"Accept", "application/vnd.github+json"},
@@ -35,7 +35,26 @@ namespace gh.Proxies.GithubProxy
             return response;
         }
 
-         protected async Task<string> GetCAsync(string segment){
+        public async Task<List<Pull2>> GetRepoPulls(string org, string repoName, CancellationToken cancellationToken)
+        {
+            // Set the token
+            Token = GH_TOKEN;
+            // Set the headers per github requirement 
+            var headers = new Dictionary<string, string> {
+                {"X-GitHub-Api-Version" , "2022-11-28"},
+                {"Accept", "application/vnd.github+json"},
+                {"User-Agent" , "my test app"}
+            };
+            Headers = headers;
+            // Set the segment url
+            var seg = $"repos/{org}/{repoName}/pulls";
+            // Make the http call
+            var response = await GetAsync<List<Pull2>>(seg, null, 30, cancellationToken);
+            //
+            return response;
+        }
+
+        protected async Task<string> GetCAsync(string segment){
             using (var httpClient = new HttpClient())
             {
                 using (var request = new HttpRequestMessage(new HttpMethod("GET"), $"{Url}{segment}"))
@@ -51,7 +70,6 @@ namespace gh.Proxies.GithubProxy
 
                     }
                     throw new Exception("http error:"+ resp.StatusCode);
-                    
                 }
             }
         }

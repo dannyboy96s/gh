@@ -1,5 +1,7 @@
 using System.Net;
+using gh.Domain.Response;
 using gh.Proxies.Contracts;
+using Mapster;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
 using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes;
@@ -25,8 +27,14 @@ namespace Company.Function
         {
             var response = req.CreateResponse(HttpStatusCode.OK);
             try {
-                var res = await _proxy.GetRepoContributors(org, repo, cancellationToken);
-                await response.WriteAsJsonAsync(res);
+                var contributors = await _proxy.GetRepoContributors(org, repo, cancellationToken);
+                var result = new List<ContributorResponse>();
+                if (contributors is not null)
+                    foreach (var contributor in contributors)
+                        // map to ContributorResponse model and add to result list
+                        result.Add(contributor.Adapt<ContributorResponse>());
+                //
+                await response.WriteAsJsonAsync(result);
             } 
             catch (Exception e) {
                 _logger.LogError("error occured: " + e.Message, e);

@@ -18,11 +18,17 @@
 
     3. To see the swagger view, once the project is running you can below url
         # Local host swagger ui http://localhost:PORT/api/swagger/ui
+        # sample org/repo for /contributors endpoint
+            # org: jbogard
+            # repo: MediatR
+        # sample org/repo for /pulls endpoint
+            # org: Azure-Sample
+            # repo: blockchain            
 
     4. Make the requests!
 
-# Architecture High Level Diagram
-insert diagram here....
+# Azure Architecture High Level Diagram
+<img src="imgs/AzureArchDiagram.png"/>
 
 
 # Architecture High Level Design
@@ -104,4 +110,5 @@ insert diagram here....
         # Can be accomplished with Mediator validation behavior
     # Middleware for jwt authentication to protect the function endpoints
     # Consolidate logging and handle expections better (custom exceptions)
+    # Add unit tests
 

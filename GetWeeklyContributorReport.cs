@@ -20,6 +20,7 @@
 //         public void Run([TimerTrigger("0 */5 * * * *")] MyInfo myTimer)
 //         {
 //             _logger.LogInformation($"C# Timer trigger function executed at: {DateTime.Now}");
+//             // COMMENTED THIS OUT, BUT ADDED IT JUST AS A POSSIBLE FUNCTIONALITY (LIKE A WEEKLY REPORT)
 //             // get the contributions
 //             // possible return options....
 //             // upload them somewhere cosmosdb? blob?

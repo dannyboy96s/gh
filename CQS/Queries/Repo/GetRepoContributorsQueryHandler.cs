@@ -7,7 +7,7 @@ using gh.Proxies.Contracts;
 using Mapster;
 using MediatR;
 
-namespace gh.CQS.Queries.Github
+namespace gh.CQS.Queries.Repo
 {
     public class GetRepoContributorsQueryHandler : IRequestHandler<GetRepoContributorsQuery, List<ContributorResponse>>
     {
